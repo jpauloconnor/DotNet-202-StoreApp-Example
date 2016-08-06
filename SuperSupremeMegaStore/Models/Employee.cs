@@ -33,7 +33,6 @@ namespace SuperSupremeMegaStore.Models
             get { return LastName + ", " + FirstMidName; }
         }
 
-        public virtual ICollection<Product> Products { get; set; }
         public virtual FloorAssignment FloorAssignment { get; set; }
 
 
