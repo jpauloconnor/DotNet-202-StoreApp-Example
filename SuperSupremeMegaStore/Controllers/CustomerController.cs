@@ -47,15 +47,21 @@ namespace SuperSupremeMegaStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CustomerID,LastName,FirstName,LastPurchase")] Customer customer)
+        public ActionResult Create([Bind(Include = "LastName,FirstName,LastPurchase")] Customer customer)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Customers.Add(customer);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch(DataException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. Please contact your administrator.");
+            }
             return View(customer);
         }
 

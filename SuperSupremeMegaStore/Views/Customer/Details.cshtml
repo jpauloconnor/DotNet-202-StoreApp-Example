@@ -33,6 +33,30 @@
         <dd>
             @Html.DisplayFor(model => model.LastPurchase)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchases)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Purchase</th>
+                    <th>Quantity</th>
+                </tr>
+                @foreach (var item in Model.Purchases)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+
 
     </dl>
 </div>
