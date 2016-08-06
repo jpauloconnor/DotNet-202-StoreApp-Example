@@ -171,7 +171,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608061209496_InitialCreate.cs" />
+    <Compile Include="Migrations\201608061209496_InitialCreate.Designer.cs">
+      <DependentUpon>201608061209496_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608061858102_initial.cs" />
+    <Compile Include="Migrations\201608061858102_initial.Designer.cs">
+      <DependentUpon>201608061858102_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608061904098_columnfirstname.cs" />
+    <Compile Include="Migrations\201608061904098_columnfirstname.Designer.cs">
+      <DependentUpon>201608061904098_columnfirstname.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\FloorAssignment.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Purchase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -234,6 +249,17 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201608061209496_InitialCreate.resx">
+      <DependentUpon>201608061209496_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608061858102_initial.resx">
+      <DependentUpon>201608061858102_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608061904098_columnfirstname.resx">
+      <DependentUpon>201608061904098_columnfirstname.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
