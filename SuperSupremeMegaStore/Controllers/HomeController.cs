@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SuperSupremeMegaStore.DAL;
+using SuperSupremeMegaStore.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,8 @@ namespace SuperSupremeMegaStore.Controllers
 {
     public class HomeController : Controller
     {
+        private StoreContext db = new StoreContext();
+
         public ActionResult Index()
         {
             return View();
@@ -15,11 +19,20 @@ namespace SuperSupremeMegaStore.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            IQueryable<PurchaseDateGroup> data = from customer in db.Customers
+                                                   group customer by customer.LastPurchase  into dateGroup
+                                                   select new PurchaseDateGroup()
+                                                   {
+                                                       PurchaseDateInfo = dateGroup.Key,
+                                                       PurchaseCount = dateGroup.Count()
+                                                   };
+            return View(data.ToList());
         }
-
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
