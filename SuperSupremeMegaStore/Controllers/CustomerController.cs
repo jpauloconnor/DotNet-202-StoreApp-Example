@@ -16,10 +16,39 @@ namespace SuperSupremeMegaStore.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Customer
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            return View(db.Customers.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var customers = from c in db.Customers
+                           select c;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customers = customers.Where(c => c.LastName.Contains(searchString)
+                                       || c.FirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    customers = customers.OrderByDescending(c => c.LastName);
+                    break;
+                case "Date":
+                    customers = customers.OrderBy(c => c.LastPurchase);
+                    break;
+                case "date_desc":
+                    customers = customers.OrderByDescending(c => c.LastPurchase);
+
+                    break;
+                default:
+                    customers = customers.OrderBy(c => c.LastName);
+                    break;
+            }
+            return View(customers.ToList());
         }
+
+
+
 
         // GET: Customer/Details/5
         public ActionResult Details(int? id)
@@ -97,11 +126,15 @@ namespace SuperSupremeMegaStore.Controllers
         }
 
         // GET: Customer/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? id, bool? saveChangesError=false)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             Customer customer = db.Customers.Find(id);
             if (customer == null)
