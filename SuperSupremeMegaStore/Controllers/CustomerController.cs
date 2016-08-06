@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using SuperSupremeMegaStore.DAL;
 using SuperSupremeMegaStore.Models;
+using PagedList;
 
 namespace SuperSupremeMegaStore.Controllers
 {
@@ -16,10 +17,24 @@ namespace SuperSupremeMegaStore.Controllers
         private StoreContext db = new StoreContext();
 
         // GET: Customer
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
             var customers = from c in db.Customers
                            select c;
             if (!String.IsNullOrEmpty(searchString))
@@ -44,7 +59,9 @@ namespace SuperSupremeMegaStore.Controllers
                     customers = customers.OrderBy(c => c.LastName);
                     break;
             }
-            return View(customers.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(customers.ToPagedList(pageNumber, pageSize));
         }
 
 
