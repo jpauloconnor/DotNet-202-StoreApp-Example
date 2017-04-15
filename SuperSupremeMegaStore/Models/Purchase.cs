@@ -13,5 +13,6 @@ namespace SuperSupremeMegaStore.Models
 
         public virtual Product Product { get; set; }
         public virtual Customer Customer { get; set; }
+   //     public virtual Employee Employee { get; set; }
     }
 }

@@ -6,15 +6,8 @@ using System.Web;
 
 namespace SuperSupremeMegaStore.ViewModels
 {
-    public class PurchaseDateGroup
+    public class AssignmentEmployeeGroup
     {
-        [DataType(DataType.Date)]
-        public DateTime? PurchaseDateInfo { get; set; }
-
-        public int PurchaseCount { get; set; }
-
-
-
         [DataType(DataType.Date)]
         public DateTime? EmployeeStartDateInfo { get; set; }
 

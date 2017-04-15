@@ -9,32 +9,16 @@ namespace SuperSupremeMegaStore.Models
 {
     public class Employee
     {
-        public int ID { get; set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
-        [StringLength(50)]
+        public int EmployeeID { get; set; }
         public string LastName { get; set; }
-
-        [Required]
-        [Column("FirstName")]
-        [Display(Name = "First Name")]
-        [StringLength(50)]
-        public string FirstMidName { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Hire Date")]
+        public string FirstName { get; set; }
         public DateTime HireDate { get; set; }
-
-        [Display(Name = "Full Name")]
         public string FullName
         {
-            get { return LastName + ", " + FirstMidName; }
+            get { return LastName + ", " + FirstName; }
         }
 
-        public virtual FloorAssignment FloorAssignment { get; set; }
-
+        public virtual ICollection<Employee> Employees { get; set; }
 
     }
 }

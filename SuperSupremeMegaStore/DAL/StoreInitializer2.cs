@@ -6,14 +6,14 @@ using SuperSupremeMegaStore.Models;
 
 namespace SuperSupremeMegaStore.DAL
 {
-    public class StoreInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<StoreContext>
+    public class StoreInitializer2 : System.Data.Entity.DropCreateDatabaseIfModelChanges<StoreContext>
     {
         protected override void Seed(StoreContext context)
         {
             var customer = new List<Customer>
             {
-            new Customer { FirstName = "Zach", LastName = "Tinney", LastPurchase = DateTime.Parse("2004-09-01") },
-            new Customer { FirstName = "Chris", LastName = "Wainscott", LastPurchase = DateTime.Parse("2005-09-01") },
+            new Customer { FirstName = "Charles", LastName = "Michael", LastPurchase = DateTime.Parse("2004-09-01") },
+            new Customer { FirstName = "L", LastName = "Lorraine", LastPurchase = DateTime.Parse("2005-09-01") },
             new Customer { FirstName = "Jenn", LastName = "Aikins", LastPurchase = DateTime.Parse("2006-09-01") },
             new Customer { FirstName = "Paul", LastName = "O'Connor", LastPurchase = DateTime.Parse("2007-09-01") },
             new Customer { FirstName = "Auri", LastName = "Rahimzadeh", LastPurchase = DateTime.Parse("2008-09-01") },
@@ -57,7 +57,7 @@ namespace SuperSupremeMegaStore.DAL
             };
             employees.ForEach(s => context.Employees.Add(s));
             context.SaveChanges();
-            
+
             var departments = new List<Department>
             {
                 new Department { DepartmentID = 1, Name = "Food", TotalSales = 70000 },
@@ -68,7 +68,7 @@ namespace SuperSupremeMegaStore.DAL
             };
             departments.ForEach(s => context.Departments.Add(s));
             context.SaveChanges();
-            
+
             var assignments = new List<Assignment>
             {
                 new Assignment { EmployeeID = 1, DepartmentID = 1 },
@@ -77,7 +77,7 @@ namespace SuperSupremeMegaStore.DAL
             };
             assignments.ForEach(s => context.Assignments.Add(s));
             context.SaveChanges();
-            
+
 
         }
     }

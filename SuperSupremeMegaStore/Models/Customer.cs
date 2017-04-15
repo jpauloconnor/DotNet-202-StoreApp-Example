@@ -10,6 +10,7 @@ namespace SuperSupremeMegaStore.Models
     public class Customer
     {
         public int CustomerID { get; set; }
+        
         [Required]
         [StringLength(50)]
         [Display(Name = "Last Name")]

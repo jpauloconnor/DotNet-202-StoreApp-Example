@@ -27,6 +27,16 @@ namespace SuperSupremeMegaStore.Controllers
                                                        PurchaseCount = dateGroup.Count()
                                                    };
             return View(data.ToList());
+
+            IQueryable<PurchaseDateGroup> info = from employee in db.Employees
+                                                 group employee by employee.HireDate into dateGroup
+                                                 select new PurchaseDateGroup ()
+                                                 {
+                                                       EmployeeStartDateInfo = dateGroup.Key,
+                                                       EmployeeCount = dateGroup.Count()                        
+                                                 };
+            return View(info.ToList());
+
         }
         protected override void Dispose(bool disposing)
         {

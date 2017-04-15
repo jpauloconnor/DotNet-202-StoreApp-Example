@@ -26,8 +26,6 @@ namespace SuperSupremeMegaStore.Models
         //TODO: handle the inventory
         public int Inventory { get; set; }
 
-        public virtual Department Department { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
-        public virtual ICollection<Employee> Employees { get; set; }
     }
 }
